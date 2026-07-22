@@ -264,76 +264,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {% endif %}
 
 
-       <script>
-
-         
-        
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('input[name="q"]');
-    const resultsWrapper = document.createElement('div');
-    resultsWrapper.classList.add('search-results');
-    searchInput.parentNode.appendChild(resultsWrapper);
-
-    let timeout;
-    searchInput.addEventListener('input', function () {
-        clearTimeout(timeout);
-        const query = this.value;
-
-        
-
-        timeout = setTimeout(() => {
-            fetch(`/search/suggest.json?q=${query}&resources[type]=product`)
-                .then(response => response.json())
-                .then(data => {                    
-                });
-        }, 300);
-    });
-});
-
-
-
-
-
-        
-window.addEventListener('scroll', function() {
-  const containers = document.querySelectorAll('.shopify-section-banner .container-box');
-
-  containers.forEach(function(container) {
-    const contentBox = container.querySelector('.content-box');
-    const containerRect = container.getBoundingClientRect();
-    const containerTop = containerRect.top;
-    const containerBottom = containerRect.bottom;
-    const windowHeight = window.innerHeight;
-
-    // Adjust behavior for smaller screens
-    if (window.innerWidth > 768) {
-      // Stick the content box to the bottom of the viewport when the container is partially visible
-      if (containerTop < windowHeight && containerBottom > windowHeight) {
-        contentBox.style.position = 'fixed';
-        contentBox.style.bottom = '0';
-        contentBox.style.top = 'unset';
-      } 
-      // Stop at the bottom of the container
-      else if (containerBottom <= windowHeight) {
-        contentBox.style.position = 'absolute';
-        contentBox.style.bottom = '0';
-        contentBox.style.top = 'unset';
-      } 
-      // Stick to the top of the container when scrolling up past the container's top
-      else if (containerTop >= 0) {
-        contentBox.style.position = 'absolute';
-        contentBox.style.top = '0';
-        contentBox.style.bottom = 'unset';
-      }
-    } else {
-      // For smaller screens, ensure content stays in view without fixing
-      contentBox.style.position = 'absolute';
-      contentBox.style.bottom = '0';
-      contentBox.style.top = 'unset';
-    }
-  });
-});
-
 </script>     
       {% if page.handle == 'mcm-icons-edit' %}
       <!-- <link
@@ -383,7 +313,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         {%- endif -%}
         
         {%- if settings.use_custom_js -%}
-            {{ 'custom.js' | asset_url | script_tag }}
+            <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
         {%- endif -%}
         
         <div class="background-overlay">
