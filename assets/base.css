@@ -35,15 +35,16 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
 
 /* Base */
 
-@font-face { font-family: MCM-LIGHT; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-Light_copy.woff?v=1727855448'); } 
-/*  @font-face { font-family: MCM-VAR; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.woff?v=1727864581'); } }*/
- @font-face { font-family: MCM Favorit Bold Extended; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf?v=1728891475'); } 
+@font-face { font-family: MCM-LIGHT; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-Light_copy.woff?v=1727855448'); font-display: swap; } 
+/*  @font-face { font-family: MCM-VAR; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.woff?v=1727864581'); font-display: swap; } }*/
+ @font-face { font-family: MCM Favorit Bold Extended; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf?v=1728891475'); font-display: swap; } 
 /* @font-face { font-family: MCM FAVORIT VARIABLE; src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.ttf?v=1728891476'); } 
  */
 
 @font-face {
   font-family: "MCMFavoritVariable";
-  src: url("{{ '[MCMFavoritVariable]' | https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.ttf?v=1728891476 }}") format("[ttf]");
+  src: url("https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.ttf?v=1728891476") format("truetype");
+  font-display: swap;
 }
 
 
@@ -51,19 +52,22 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCM Favorit Variable';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.ttf') format('truetype');
     font-weight: normal; /* Regular weight */
+    font-display: swap;
 }
 
         @font-face {
     font-family: 'MCMFavoritBoldExtendedcopy1';
-    src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf?v=1728891475') format('otf');
+    src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf?v=1728891475') format('opentype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
         @font-face {
     font-family: 'MCMFavoritBoldExtendedcopy2';
-    src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf') format('otf');
+    src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 
@@ -74,6 +78,7 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCMFavorit-Regularbh';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended.woff2?v=1754558511') format('woff2');
     font-weight: light;
+    font-display: swap;
 
 }
 
@@ -81,6 +86,7 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCMFavorit-BoldExtended_copy';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-BoldExtended_copy.woff?v=1726689277') format('woff');
     font-weight: normal;
+    font-display: swap;
 
 }
 
@@ -88,6 +94,7 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCMFavoritVariable_copy';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.woff?v=1728895607') format('woff');
     font-weight: normal;
+    font-display: swap;
 
 }
 
@@ -95,12 +102,14 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCM-Favorit-Book_copy';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCM-Favorit-Book.woff?v=1727868050') format('woff');
     font-weight: normal;
+    font-display: swap;
 }
 
      @font-face {
     font-family: 'MCMFavorit-Regular_copy';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-Regular_copy.woff?v=1727867435') format('woff');
     font-weight: normal;
+    font-display: swap;
 }
 
 
@@ -108,6 +117,7 @@ ul.menu-level-1 li:nth-child(7) ul.mobile-menu-level-2 li:nth-child(3) a:before 
     font-family: 'MCMFavorit-Light_copy';
     src: url('https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-Light_copy.woff?v=1727855448') format('woff');
     font-weight: normal;
+    font-display: swap;
 }
 
 
@@ -7577,16 +7587,19 @@ padding-bottom: 10px;
 @font-face {
 font-family: "MCM-VAR";
 src: url("https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavoritVariable.woff?v=1727864581") format("woff");
+font-display: swap;
 }
 
 @font-face {
 font-family: "MCM-Favorit-Regular";
 src: url("https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCMFavorit-Regular_copy.woff?v=1727867435") format("woff");
+font-display: swap;
 }
 
 @font-face {
 font-family: "MCM-Favorit-Book";
 src: url("https://cdn.shopify.com/s/files/1/0888/3594/8829/files/MCM-Favorit-Book.woff?v=1727868050") format("woff");
+font-display: swap;
 }
 
 @font-face {
@@ -7595,6 +7608,7 @@ font-family: 'MCM-Favorit-Book';
 
 src: url('MCM Favorit Book.woff') format('woff');  
 font-style: normal;
+font-display: swap;
 
 }
 
