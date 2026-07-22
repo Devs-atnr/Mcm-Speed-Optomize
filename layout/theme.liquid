@@ -14,12 +14,24 @@
 -%}
 <html class="no-js" lang="{{ request.locale.iso_code }}"{% if settings.enable_layout_rtl and enable_iso_rtl %} dir="rtl"{% endif %}>
     <head>
-        <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KZRNVZTC');</script>
+        <!-- Google Tag Manager (Deferred) -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KZRNVZTC');
+    }
+    ['scroll','mousemove','touchstart','pointerdown'].forEach(function(e) {
+        window.addEventListener(e, loadGTM, {once: true, passive: true});
+    });
+    setTimeout(loadGTM, 5000);
+});
+</script>
 <!-- End Google Tag Manager -->
 
 {% comment %}
@@ -109,7 +121,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {% render 'meta-tags' %}
         {% render 'mcm-seo-hreflang' %}
       
-        {{ content_for_header }}
+        {%- capture content_for_header_custom -%}
+          {{ content_for_header }}
+        {%- endcapture -%}
+        {%- assign content_for_header_custom = content_for_header_custom | replace: 'window.attachEvent("onload", asyncLoad);', 'window.attachEvent("onload", function(){});' | replace: 'window.addEventListener("load", asyncLoad, false);', 'window.addEventListener("load", function(){}, false);' | replace: 'if(window.attachEvent)', 'var asyncLoaded = false; function loadAsyncApps() { if(asyncLoaded) return; asyncLoaded = true; setTimeout(asyncLoad, 10); } ["scroll", "mousemove", "touchstart"].forEach(function(e){ window.addEventListener(e, loadAsyncApps, {once:true, passive:true})}); setTimeout(loadAsyncApps, 5000); if(window.attachEvent)' -%}
+        {{ content_for_header_custom }}
         {% render 'variable' %}
         {% render 'global-style' %}
         {% render 'global-script' %}
