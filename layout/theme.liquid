@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ['scroll','mousemove','touchstart','pointerdown'].forEach(function(e) {
         window.addEventListener(e, loadGTM, {once: true, passive: true});
     });
-    setTimeout(loadGTM, 5000);
+    setTimeout(loadGTM, 12000);
 });
 </script>
 <!-- End Google Tag Manager -->
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
         {%- capture content_for_header_custom -%}
           {{ content_for_header }}
         {%- endcapture -%}
-        {%- assign content_for_header_custom = content_for_header_custom | replace: 'window.attachEvent("onload", asyncLoad);', 'window.attachEvent("onload", function(){});' | replace: 'window.addEventListener("load", asyncLoad, false);', 'window.addEventListener("load", function(){}, false);' | replace: 'if(window.attachEvent)', 'var asyncLoaded = false; function loadAsyncApps() { if(asyncLoaded) return; asyncLoaded = true; setTimeout(asyncLoad, 10); } ["scroll", "mousemove", "touchstart"].forEach(function(e){ window.addEventListener(e, loadAsyncApps, {once:true, passive:true})}); setTimeout(loadAsyncApps, 5000); if(window.attachEvent)' -%}
+        {%- assign content_for_header_custom = content_for_header_custom | replace: 'window.attachEvent("onload", asyncLoad);', 'window.attachEvent("onload", function(){});' | replace: 'window.addEventListener("load", asyncLoad, false);', 'window.addEventListener("load", function(){}, false);' | replace: 'if(window.attachEvent)', 'var asyncLoaded = false; function loadAsyncApps() { if(asyncLoaded) return; asyncLoaded = true; setTimeout(asyncLoad, 10); } ["scroll", "mousemove", "touchstart"].forEach(function(e){ window.addEventListener(e, loadAsyncApps, {once:true, passive:true})}); setTimeout(loadAsyncApps, 12000); if(window.attachEvent)' -%}
         {{ content_for_header_custom }}
         {% render 'variable' %}
         {% render 'global-style' %}
