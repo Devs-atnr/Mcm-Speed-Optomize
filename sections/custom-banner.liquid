@@ -288,6 +288,15 @@
   }
 }
 
+{%- if section.index == 1 or section.settings.custom_class contains 'ban-fi' -%}
+  {%- if section.settings.desktop_image -%}
+    <link rel="preload" as="image" href="{{ section.settings.desktop_image | img_url: '1920x' }}" fetchpriority="high" media="(min-width: 552px)">
+  {%- endif -%}
+  {%- if section.settings.mobile_image -%}
+    <link rel="preload" as="image" href="{{ section.settings.mobile_image | img_url: '750x' }}" fetchpriority="high" media="(max-width: 551px)">
+  {%- endif -%}
+{%- endif -%}
+
   {% if section.settings.desktop_image %}
     /* Dynamic background images using section.id */
     #shopify-section-{{ section.id }}.shopify-section-banner {
