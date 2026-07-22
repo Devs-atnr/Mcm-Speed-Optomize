@@ -117,6 +117,14 @@
 }
 {% endschema %}
 
+{%- if section.index == 1 or section.settings.custom_class contains 'ban-fi' -%}
+  {%- if section.settings.desktop_image -%}
+    <link rel="preload" as="image" href="{{ section.settings.desktop_image | img_url: 'master' }}" fetchpriority="high" media="(min-width: 552px)">
+  {%- endif -%}
+  {%- if section.settings.mobile_image -%}
+    <link rel="preload" as="image" href="{{ section.settings.mobile_image | img_url: 'master' }}" fetchpriority="high" media="(max-width: 551px)">
+  {%- endif -%}
+{%- endif -%}
 
 <style>
   
@@ -439,30 +447,43 @@ div.eid-banner {
 </style>
 {% endif %}
 <script>
-window.addEventListener('scroll', function() {
-  const containers = document.querySelectorAll('.shopify-section-banner .container-box');
-
-  containers.forEach(function(container) {
-    const contentBox = container.querySelector('.content-box');
-    const containerRect = container.getBoundingClientRect();
-    const containerTop = containerRect.top;
-    const containerBottom = containerRect.bottom;
-    const windowHeight = window.innerHeight;
-
-    if (containerTop < windowHeight && containerBottom > windowHeight) {
-      contentBox.style.position = 'fixed';
-      contentBox.style.bottom = '0';
-      contentBox.style.top = 'unset';
-    } else if (containerBottom <= windowHeight) {
-      contentBox.style.position = 'absolute';
-      contentBox.style.bottom = '0';
-      contentBox.style.top = 'unset';
-    } else if (containerTop >= 0) {
-      contentBox.style.position = 'absolute';
-      contentBox.style.top = '0';
-      contentBox.style.bottom = 'unset';
+(function() {
+  var ticking = false;
+  function updateBannerPosition() {
+    var containers = document.querySelectorAll('.shopify-section-banner .container-box');
+    var windowHeight = window.innerHeight;
+    containers.forEach(function(container) {
+      var contentBox = container.querySelector('.content-box');
+      if (!contentBox) return;
+      var rect = container.getBoundingClientRect();
+      if (rect.top < windowHeight && rect.bottom > windowHeight) {
+        if (contentBox.style.position !== 'fixed') {
+          contentBox.style.position = 'fixed';
+          contentBox.style.bottom = '0';
+          contentBox.style.top = 'unset';
+        }
+      } else if (rect.bottom <= windowHeight) {
+        if (contentBox.style.position !== 'absolute' || contentBox.style.bottom !== '0px') {
+          contentBox.style.position = 'absolute';
+          contentBox.style.bottom = '0';
+          contentBox.style.top = 'unset';
+        }
+      } else if (rect.top >= 0) {
+        if (contentBox.style.position !== 'absolute' || contentBox.style.top !== '0px') {
+          contentBox.style.position = 'absolute';
+          contentBox.style.top = '0';
+          contentBox.style.bottom = 'unset';
+        }
+      }
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateBannerPosition);
+      ticking = true;
     }
-  });
-});
+  }, { passive: true });
+})();
 </script>
 
