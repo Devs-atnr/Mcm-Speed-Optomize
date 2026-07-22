@@ -115,14 +115,8 @@
     }
   ]
 }
-{%- if section.index == 1 or section.settings.custom_class contains 'ban-fi' -%}
-  {%- if section.settings.desktop_image -%}
-    <link rel="preload" as="image" href="{{ section.settings.desktop_image | img_url: '1920x' }}" fetchpriority="high" media="(min-width: 552px)">
-  {%- endif -%}
-  {%- if section.settings.mobile_image -%}
-    <link rel="preload" as="image" href="{{ section.settings.mobile_image | img_url: '750x' }}" fetchpriority="high" media="(max-width: 551px)">
-  {%- endif -%}
-{%- endif -%}
+{% endschema %}
+
 
 <style>
   
@@ -294,10 +288,10 @@
   }
 }
 
-  {% if section.settings.desktop_image %}
+ {% if section.settings.desktop_image %}
     /* Dynamic background images using section.id */
     #shopify-section-{{ section.id }}.shopify-section-banner {
-      background-image: url({{ section.settings.desktop_image | img_url: '1920x' }});
+      background-image: url({{ section.settings.desktop_image | img_url: 'master' }});
     }
   {% endif %}
 
@@ -305,7 +299,7 @@
     /* Tablet background image */
     @media (min-width: 552px) and (max-width: 768px) {
       #shopify-section-{{ section.id }}.shopify-section-banner {
-        background-image: url({{ section.settings.mobile_image | img_url: '1024x' }});
+        background-image: url({{ section.settings.mobile_image | img_url: 'master' }});
         max-height: 130vh;
       }
       .content-box {
@@ -316,7 +310,7 @@
     /* Mobile background image */
     @media (max-width: 551px) {
       #shopify-section-{{ section.id }}.shopify-section-banner {
-        background-image: url({{ section.settings.mobile_image | img_url: '750x' }});
+        background-image: url({{ section.settings.mobile_image | img_url: 'master' }});
         max-height: 75vh;
       }
         .video-container video {
@@ -326,7 +320,6 @@
     height: 100vh;
 
     }
-    } {% comment %} end media query max-width 551px {% endcomment %}
   {% endif %}
     
   span.link_text:hover {
@@ -446,47 +439,30 @@ div.eid-banner {
 </style>
 {% endif %}
 <script>
-(function() {
-  let ticking = false;
-  function updateBannerPosition() {
-    const containers = document.querySelectorAll('.shopify-section-banner .container-box');
+window.addEventListener('scroll', function() {
+  const containers = document.querySelectorAll('.shopify-section-banner .container-box');
+
+  containers.forEach(function(container) {
+    const contentBox = container.querySelector('.content-box');
+    const containerRect = container.getBoundingClientRect();
+    const containerTop = containerRect.top;
+    const containerBottom = containerRect.bottom;
     const windowHeight = window.innerHeight;
-    containers.forEach(function(container) {
-      const contentBox = container.querySelector('.content-box');
-      if (!contentBox) return;
-      const containerRect = container.getBoundingClientRect();
-      const containerTop = containerRect.top;
-      const containerBottom = containerRect.bottom;
 
-      if (containerTop < windowHeight && containerBottom > windowHeight) {
-        if (contentBox.style.position !== 'fixed') {
-          contentBox.style.position = 'fixed';
-          contentBox.style.bottom = '0';
-          contentBox.style.top = 'unset';
-        }
-      } else if (containerBottom <= windowHeight) {
-        if (contentBox.style.position !== 'absolute' || contentBox.style.bottom !== '0') {
-          contentBox.style.position = 'absolute';
-          contentBox.style.bottom = '0';
-          contentBox.style.top = 'unset';
-        }
-      } else if (containerTop >= 0) {
-        if (contentBox.style.position !== 'absolute' || contentBox.style.top !== '0') {
-          contentBox.style.position = 'absolute';
-          contentBox.style.top = '0';
-          contentBox.style.bottom = 'unset';
-        }
-      }
-    });
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateBannerPosition);
-      ticking = true;
+    if (containerTop < windowHeight && containerBottom > windowHeight) {
+      contentBox.style.position = 'fixed';
+      contentBox.style.bottom = '0';
+      contentBox.style.top = 'unset';
+    } else if (containerBottom <= windowHeight) {
+      contentBox.style.position = 'absolute';
+      contentBox.style.bottom = '0';
+      contentBox.style.top = 'unset';
+    } else if (containerTop >= 0) {
+      contentBox.style.position = 'absolute';
+      contentBox.style.top = '0';
+      contentBox.style.bottom = 'unset';
     }
-  }, { passive: true });
-})();
+  });
+});
 </script>
 
